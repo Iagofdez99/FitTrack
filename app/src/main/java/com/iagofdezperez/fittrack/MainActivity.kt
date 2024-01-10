@@ -122,7 +122,17 @@ fun ScaffoldApp(){
                     Estos son los primeros pasos para crear la App FitTrack
                 """.trimIndent(),
             )
+
+            Row (Modifier.align(Alignment.CenterHorizontally)) {
+                Image(
+                    painter = painterResource(R.drawable.imagen1) ,
+                    contentDescription = "Imagen de prueba"
+                )
+            }
+            
+
         }
+
     }
 }
 
