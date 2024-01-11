@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
@@ -129,10 +130,14 @@ fun ScaffoldApp(){
                     contentDescription = "Imagen de prueba"
                 )
             }
-            
 
+            Text(text = "Lista de ejercicios: " , Modifier.padding(10.dp))
+
+            Row(Modifier.padding(10.dp)){
+                var lista : List<String> = mutableListOf("PressBanca","Remo","Sentadillas","Peso Muerto")
+                ListaEjercicios(ejercicios = lista)
+            }
         }
-
     }
 }
 
@@ -140,7 +145,7 @@ fun ScaffoldApp(){
 fun ListaEjercicios(ejercicios: List<String>){
 
     Column(){
-        ejercicios.joinToString()
+        Text(text = ejercicios.joinToString())
     }
 }
 
