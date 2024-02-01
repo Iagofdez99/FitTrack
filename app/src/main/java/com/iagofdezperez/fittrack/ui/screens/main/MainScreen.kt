@@ -4,16 +4,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.ui.WorkoutScreen
 import com.iagofdezperez.fittrack.ui.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.WorkoutsTopAppBar
 
 @Composable
-public fun MainScreen() {
+public fun MainScreen(navController: NavHostController) {
     Scaffold(
         topBar = { WorkoutsTopAppBar() },
         bottomBar = { WorkoutsBottomAppBar() },
     ) { paddingValues ->
-        WorkoutScreen(modifier = Modifier.padding(paddingValues))
+        WorkoutScreen(navController,modifier = Modifier.padding(paddingValues))
     }
 }
