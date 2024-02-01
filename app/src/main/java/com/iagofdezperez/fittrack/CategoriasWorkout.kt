@@ -7,7 +7,7 @@ data class CategoriasWorkout(
     @DrawableRes val image: Int
 )
 
-fun getCategorias(): List<CategoriasWorkout> = mutableListOf(
+fun getCategorias(): List<CategoriasWorkout> = listOf(
     CategoriasWorkout("Abs", R.drawable.ejercicioabs),
     CategoriasWorkout("Chest", R.drawable.ejerciciochest),
     CategoriasWorkout("Back", R.drawable.ejercicioback),
