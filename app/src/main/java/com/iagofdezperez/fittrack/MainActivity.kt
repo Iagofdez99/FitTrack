@@ -3,7 +3,6 @@ package com.iagofdezperez.fittrack
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = "main") {
-                    composable("main") {
+                    composable(route = "main") {
                         MainScreen(navController)
                     }
                     composable(

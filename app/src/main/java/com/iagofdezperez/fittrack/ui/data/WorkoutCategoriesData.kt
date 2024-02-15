@@ -1,6 +1,7 @@
-package com.iagofdezperez.fittrack
+package com.iagofdezperez.fittrack.ui.data
 
 import androidx.annotation.DrawableRes
+import com.iagofdezperez.fittrack.R
 
 data class CategoriasWorkout(
     val name: String,

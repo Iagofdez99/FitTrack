@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.WorkoutScreen
-import com.iagofdezperez.fittrack.ui.WorkoutsBottomAppBar
-import com.iagofdezperez.fittrack.ui.WorkoutsTopAppBar
+import com.iagofdezperez.fittrack.ui.elements.WorkoutScreen
+import com.iagofdezperez.fittrack.ui.elements.WorkoutsBottomAppBar
+import com.iagofdezperez.fittrack.ui.elements.WorkoutsTopAppBar
 
 @Composable
 public fun MainScreen(navController: NavHostController) {
