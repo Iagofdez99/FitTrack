@@ -12,10 +12,12 @@ import androidx.navigation.compose.rememberNavController
 import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
 import com.iagofdezperez.fittrack.ui.data.getCategorias
-import com.iagofdezperez.fittrack.ui.screens.MainScreen
 import com.iagofdezperez.fittrack.ui.screens.details.DetailScreen
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainScreen
 import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

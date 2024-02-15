@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.screens
+package com.iagofdezperez.fittrack.ui.screens.mainScreen
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
