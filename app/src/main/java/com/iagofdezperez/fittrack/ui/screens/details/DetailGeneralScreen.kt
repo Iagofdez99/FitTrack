@@ -13,13 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
 import com.iagofdezperez.fittrack.ui.elements.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.elements.WorkoutsTopAppBar
 
 @Composable
-fun DetailScreen(workoutId: String) {
+fun DetailScreen(
+    navController: NavHostController,
+    exercisesWorkout: List<exercisesWorkout>,
+    workoutId: String
+) {
+    val exercises = exercisesWorkout.groupBy { it.muscleGroup }
+    //val exercisesCondition = rememberSaveable { mutableStateOf(workoutId) }
     Scaffold(
-        topBar = { WorkoutsTopAppBar() },
+        topBar = { WorkoutsTopAppBar(title = "$workoutId workout") },
         bottomBar = { WorkoutsBottomAppBar() },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues))
@@ -37,8 +45,12 @@ fun DetailScreen(workoutId: String) {
                     .padding(0.dp),
                 columns = GridCells.Fixed(1),
             ) {
-                items(listaEjerciciosAbs()) { ejerciciosAbs ->
-                    ejerciciosEnLista(ejercicio = ejerciciosAbs)
+                exercises.forEach { (muscleGroup, exercises) ->
+                    if (workoutId == muscleGroup) {
+                        items(exercises) { exercises ->
+                            workoutList(ejercicio = exercises.name)
+                        }
+                    }
                 }
             }
         }
@@ -46,21 +58,14 @@ fun DetailScreen(workoutId: String) {
 }
 
 @Composable
-fun ejerciciosEnLista(ejercicio: String) {
+fun workoutList(ejercicio: String) {
     Column {
         Text(
             text = ejercicio,
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(8.dp)
         )
     }
 }
-
-fun listaEjerciciosAbs(): List<String> = listOf(
-    "Ejercicio 1",
-    "Ejercicio 2",
-    "Ejercicio 3",
-    "Ejercicio 4",
-    "Ejercicio 5",
-)

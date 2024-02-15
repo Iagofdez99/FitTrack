@@ -3,21 +3,21 @@ package com.iagofdezperez.fittrack.ui.data
 import androidx.annotation.DrawableRes
 import com.iagofdezperez.fittrack.R
 
-data class CategoriasWorkout(
+data class WorkoutCategoriesData(
     val name: String,
     @DrawableRes val image: Int
 )
 
-fun getCategorias(): List<CategoriasWorkout> = listOf(
-    CategoriasWorkout("Abs", R.drawable.ejercicioabs),
-    CategoriasWorkout("Chest", R.drawable.ejerciciochest),
-    CategoriasWorkout("Back", R.drawable.ejercicioback),
-    CategoriasWorkout("Front Legs", R.drawable.ejerciciolegs),
-    CategoriasWorkout("Back Legs", R.drawable.ejerciciobackleg),
-    CategoriasWorkout("Shoulders", R.drawable.ejercicioshoulders),
-    CategoriasWorkout("Biceps", R.drawable.ejerciciobiceps),
-    CategoriasWorkout("Triceps", R.drawable.ejerciciotriceps),
-    CategoriasWorkout("Front Mix", R.drawable.front),
-    CategoriasWorkout("Back Mix", R.drawable.back),
+fun getCategorias(): List<WorkoutCategoriesData> = mutableListOf(
+    WorkoutCategoriesData("Abs", R.drawable.ejercicioabs),
+    WorkoutCategoriesData("Chest", R.drawable.ejerciciochest),
+    WorkoutCategoriesData("Back", R.drawable.ejercicioback),
+    WorkoutCategoriesData("Front legs", R.drawable.ejerciciolegs),
+    WorkoutCategoriesData("Back legs", R.drawable.ejerciciobackleg),
+    WorkoutCategoriesData("Shoulders", R.drawable.ejercicioshoulders),
+    WorkoutCategoriesData("Biceps", R.drawable.ejerciciobiceps),
+    WorkoutCategoriesData("Triceps", R.drawable.ejerciciotriceps),
+    WorkoutCategoriesData("Front mix", R.drawable.front),
+    WorkoutCategoriesData("Back mix", R.drawable.back),
 )
 

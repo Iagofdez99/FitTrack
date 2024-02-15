@@ -3,11 +3,15 @@ package com.iagofdezperez.fittrack
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.NavType
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import com.iagofdezperez.fittrack.ui.data.Routes
+import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
+import com.iagofdezperez.fittrack.ui.data.getCategorias
 import com.iagofdezperez.fittrack.ui.screens.MainScreen
 import com.iagofdezperez.fittrack.ui.screens.details.DetailScreen
 import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
@@ -17,21 +21,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FitTrackTheme {
+                val workoutCategories by rememberSaveable { mutableStateOf(getCategorias()) }
+                val exercisesWorkout by rememberSaveable { mutableStateOf(exercisesWorkout())}
                 val navController = rememberNavController()
 
-                NavHost(navController = navController, startDestination = "main") {
-                    composable(route = "main") {
-                        MainScreen(navController)
-                    }
-                    composable(
-                        route = "detail/{workoutId}",
-                        arguments = listOf(
-                            navArgument("workoutId") { type = NavType.StringType }
+                NavHost(navController = navController, startDestination = Routes.MainScreen.route) {
+                    composable(route = Routes.MainScreen.route) {
+                        MainScreen(
+                            workoutCategories,
+                            navController
                         )
-                    ) { backStackEntry ->
-                        val id = backStackEntry.arguments?.getString("workoutId")
-                        requireNotNull(id)
-                        DetailScreen(id)
+                    }
+                    composable(route = Routes.DetailScreen.route) { backStackEntry ->
+                        val workoutId = backStackEntry.arguments?.getString("workoutId")
+                        DetailScreen(navController,exercisesWorkout, workoutId.orEmpty())
                     }
                 }
             }

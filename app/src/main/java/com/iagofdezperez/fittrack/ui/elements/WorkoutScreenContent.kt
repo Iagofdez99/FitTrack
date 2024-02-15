@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.data.getCategorias
+import com.iagofdezperez.fittrack.ui.data.WorkoutCategoriesData
 
 @Composable
 fun WorkoutScreen(
+    workoutCategories: List<WorkoutCategoriesData>,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -20,8 +21,8 @@ fun WorkoutScreen(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp)
     ) {
-        items(getCategorias()) { workout ->
-            WorkoutCard(name = workout.name, image = workout.image, navController)
+        items(workoutCategories) { workout ->
+            WorkoutCard(workoutId = workout.name, image = workout.image, navController)
         }
     }
 }

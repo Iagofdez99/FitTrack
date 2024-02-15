@@ -1,9 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    //kotlin("kapt")
-    //id("com.google.dagger.hilt.android") version "2.44" apply false
-
 }
 
 android {
@@ -71,12 +68,4 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    //implementation("com.google.dagger:hilt-android:2.44")
-    //kapt("com.google.dagger:hilt-android-compiler:2.44")
-    //implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 }
-
-// Allow references to generated code
-//kapt {
-//    correctErrorTypes = true
-//}

@@ -21,13 +21,14 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutsTopAppBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    title:String = "FitTrack App"
 ) {
     MediumTopAppBar(
         title = {
             Text(
                 letterSpacing = 2.sp,
-                text = "FitTrack App",
+                text = title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 26.sp
             )
