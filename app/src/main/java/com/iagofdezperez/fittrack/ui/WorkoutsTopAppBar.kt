@@ -25,7 +25,7 @@ fun WorkoutsTopAppBar(
         title = {
             Text(
                 letterSpacing = 2.sp,
-                text = "FitTrack App",
+                text = "FitTrack App2",
                 fontWeight = FontWeight.Bold
             )
         },
