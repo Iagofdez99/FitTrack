@@ -1,8 +1,8 @@
-package com.iagofdezperez.fittrack.ui.elements
+package com.iagofdezperez.fittrack.ui.screens.mainScreen.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.twotone.Favorite
-import androidx.compose.material.icons.twotone.Menu
 import androidx.compose.material.icons.twotone.Person
 import androidx.compose.material.icons.twotone.Search
 import androidx.compose.material.icons.twotone.Settings
@@ -15,15 +15,18 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.iagofdezperez.fittrack.ui.data.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutsTopAppBar(
     modifier: Modifier = Modifier,
-    title:String = "FitTrack App",
-    navHost:() -> Unit
+    title: String = "FitTrack App",
+    navHost: (String) -> Unit,
+    imageVector: ImageVector
 ) {
     MediumTopAppBar(
         title = {
@@ -41,8 +44,12 @@ fun WorkoutsTopAppBar(
             actionIconContentColor = Color.White
         ),
         navigationIcon = {
-            IconButton(onClick = {}) {
-                Icon(imageVector = Icons.TwoTone.Menu, contentDescription = "Menu")
+            IconButton(onClick = {
+                if (imageVector == Icons.Default.ArrowBack) {
+                    navHost(Routes.MainScreen.route)
+                }
+            }) {
+                Icon(imageVector = imageVector, contentDescription = "Menu")
             }
         },
         actions = {
@@ -52,7 +59,7 @@ fun WorkoutsTopAppBar(
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.TwoTone.Search, contentDescription = "Date")
             }
-            IconButton(onClick = {navHost()}) {
+            IconButton(onClick = { navHost(Routes.LoginScreen.route) }) {
                 Icon(imageVector = Icons.TwoTone.Person, contentDescription = "Profile")
             }
             IconButton(onClick = {}) {

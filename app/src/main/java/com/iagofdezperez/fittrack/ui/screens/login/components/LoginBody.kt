@@ -15,9 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,17 +25,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.iagofdezperez.fittrack.ui.screens.login.LoginViewModel
 
 @Composable
-fun LoginBody(modifier: Modifier) {
-    var user by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
+fun LoginBody(modifier: Modifier, loginViewModel: LoginViewModel) {
+    val user: String by loginViewModel.user.observeAsState(initial = "")
+    val password: String by loginViewModel.password.observeAsState(initial = "")
+
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         AppLogo()
         Spacer(modifier = Modifier.size(64.dp))
-        UserField(user) { user = it }
+        UserField(user) { loginViewModel.onUserChanged(it) }
         Spacer(modifier = Modifier.size(16.dp))
-        PasswordField(password) { password = it }
+        PasswordField(password) { loginViewModel.onPasswordChanged(it) }
         Spacer(modifier = Modifier.size(32.dp))
         LoginButton()
     }
@@ -46,7 +46,7 @@ fun LoginBody(modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = false)
 @Composable
 fun AppLogo() {
-    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         Text(
             text = "FitTrack",
             fontSize = 60.sp,
@@ -59,7 +59,7 @@ fun AppLogo() {
 }
 
 @Composable
-fun UserField(user: String,onChange:(String) -> Unit) {
+fun UserField(user: String, onChange: (String) -> Unit) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = user,
@@ -83,11 +83,11 @@ fun UserField(user: String,onChange:(String) -> Unit) {
 }
 
 @Composable
-fun PasswordField(password:String,onPasswordChange:(String) -> Unit) {
+fun PasswordField(password: String, onPasswordChange: (String) -> Unit) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = password,
-        onValueChange = { onPasswordChange(it)},
+        onValueChange = { onPasswordChange(it) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         maxLines = 1,
         singleLine = true,
@@ -111,7 +111,7 @@ fun PasswordField(password:String,onPasswordChange:(String) -> Unit) {
 fun LoginButton() {
     Button(
         onClick = { /*TODO*/ },
-        Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 48.dp), shape = CutCornerShape(1.dp)
     ) {

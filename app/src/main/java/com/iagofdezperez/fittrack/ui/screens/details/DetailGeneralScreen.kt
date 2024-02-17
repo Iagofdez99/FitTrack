@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -16,22 +18,31 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
-import com.iagofdezperez.fittrack.ui.elements.WorkoutsBottomAppBar
-import com.iagofdezperez.fittrack.ui.elements.WorkoutsTopAppBar
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsBottomAppBar
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsTopAppBar
 
 @Composable
 fun DetailScreen(
     navController: NavHostController,
     exercisesWorkout: List<exercisesWorkout>,
-    workoutId: String
+    workoutId: String,
+    mainViewModel: MainViewModel
 ) {
     val exercises = exercisesWorkout.groupBy { it.muscleGroup }
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(title = "$workoutId workout",
-                navHost = { navController.navigate(Routes.LoginScreen.route) })
+                navHost = { navController.navigate(it) },
+                imageVector = Icons.Default.ArrowBack
+            )
         },
-        bottomBar = { WorkoutsBottomAppBar(navHost = { navController.navigate(Routes.LoginScreen.route) }) },
+        bottomBar = {
+            WorkoutsBottomAppBar(
+                navHost = { navController.navigate(Routes.LoginScreen.route) },
+                mainViewModel = mainViewModel
+            )
+        },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues))
         {

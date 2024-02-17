@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.elements
+package com.iagofdezperez.fittrack.ui.screens.mainScreen.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -11,21 +11,23 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 
 @Composable
-fun WorkoutsBottomAppBar(modifier: Modifier = Modifier, navHost: () -> Unit) {
-    var index by rememberSaveable { mutableStateOf(0) }
+fun WorkoutsBottomAppBar(
+    modifier: Modifier = Modifier,
+    navHost: () -> Unit,
+    mainViewModel: MainViewModel
+) {
+    val index: Int by mainViewModel.index.observeAsState(initial = 0)
     NavigationBar(containerColor = Color.Black) {
-
         NavigationBarItem(
             selected = index == 0,
-            onClick = { index = 0 },
+            onClick = { mainViewModel.onIndexrChanged(0) },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),
                 selectedTextColor = Color.White,
@@ -47,7 +49,7 @@ fun WorkoutsBottomAppBar(modifier: Modifier = Modifier, navHost: () -> Unit) {
 
         NavigationBarItem(
             selected = index == 1,
-            onClick = { index = 1 },
+            onClick = { mainViewModel.onIndexrChanged(1) },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),
                 selectedTextColor = Color.White,

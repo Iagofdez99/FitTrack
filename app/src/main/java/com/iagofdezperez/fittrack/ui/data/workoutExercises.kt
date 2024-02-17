@@ -1,7 +1,7 @@
 package com.iagofdezperez.fittrack.ui.data
 
 data class exercisesWorkout(val name:String,val muscleGroup:String)
-fun exercisesWorkout(): List<exercisesWorkout> = mutableListOf(
+fun exercisesWorkoutList(): List<exercisesWorkout> = mutableListOf(
     exercisesWorkout("Absss","Abs"),
     exercisesWorkout("Absss","Abs"),
     exercisesWorkout("Absss","Abs"),

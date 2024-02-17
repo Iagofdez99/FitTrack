@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.elements
+package com.iagofdezperez.fittrack.ui.screens.mainScreen.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke

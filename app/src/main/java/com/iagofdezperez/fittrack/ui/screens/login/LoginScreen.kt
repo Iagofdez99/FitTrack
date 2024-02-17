@@ -16,22 +16,22 @@ import com.iagofdezperez.fittrack.ui.screens.login.components.LoginBody
 import com.iagofdezperez.fittrack.ui.screens.login.components.LoginBottom
 import com.iagofdezperez.fittrack.ui.screens.login.components.LoginHeader
 
-//
+
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController, loginViewModel: LoginViewModel) {
     Box(
-        Modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
             .padding(12.dp)
     ) {
         LoginHeader(
-            Modifier
+            modifier = Modifier
                 .align(Alignment.TopEnd)
                 .size(32.dp)
         ) { navController.navigate(Routes.MainScreen.route) }
-        LoginBody(modifier = Modifier.align(Alignment.Center))
-        LoginBottom(Modifier.align(Alignment.BottomCenter))
+        LoginBody(modifier = Modifier.align(Alignment.Center), loginViewModel = loginViewModel)
+        LoginBottom(modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
