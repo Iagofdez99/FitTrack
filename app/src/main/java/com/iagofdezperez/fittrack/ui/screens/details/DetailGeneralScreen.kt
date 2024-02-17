@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
 import com.iagofdezperez.fittrack.ui.elements.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.elements.WorkoutsTopAppBar
@@ -25,10 +26,12 @@ fun DetailScreen(
     workoutId: String
 ) {
     val exercises = exercisesWorkout.groupBy { it.muscleGroup }
-    //val exercisesCondition = rememberSaveable { mutableStateOf(workoutId) }
     Scaffold(
-        topBar = { WorkoutsTopAppBar(title = "$workoutId workout") },
-        bottomBar = { WorkoutsBottomAppBar() },
+        topBar = {
+            WorkoutsTopAppBar(title = "$workoutId workout",
+                navHost = { navController.navigate(Routes.LoginScreen.route) })
+        },
+        bottomBar = { WorkoutsBottomAppBar(navHost = { navController.navigate(Routes.LoginScreen.route) }) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues))
         {

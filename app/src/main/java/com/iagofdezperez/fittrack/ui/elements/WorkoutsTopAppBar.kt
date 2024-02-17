@@ -1,9 +1,9 @@
 package com.iagofdezperez.fittrack.ui.elements
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.twotone.DateRange
 import androidx.compose.material.icons.twotone.Favorite
 import androidx.compose.material.icons.twotone.Menu
+import androidx.compose.material.icons.twotone.Person
 import androidx.compose.material.icons.twotone.Search
 import androidx.compose.material.icons.twotone.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun WorkoutsTopAppBar(
     modifier: Modifier = Modifier,
-    title:String = "FitTrack App"
+    title:String = "FitTrack App",
+    navHost:() -> Unit
 ) {
     MediumTopAppBar(
         title = {
@@ -49,10 +50,10 @@ fun WorkoutsTopAppBar(
                 Icon(imageVector = Icons.TwoTone.Favorite, contentDescription = "Favorite")
             }
             IconButton(onClick = {}) {
-                Icon(imageVector = Icons.TwoTone.DateRange, contentDescription = "Date")
+                Icon(imageVector = Icons.TwoTone.Search, contentDescription = "Date")
             }
-            IconButton(onClick = {}) {
-                Icon(imageVector = Icons.TwoTone.Search, contentDescription = "Search")
+            IconButton(onClick = {navHost()}) {
+                Icon(imageVector = Icons.TwoTone.Person, contentDescription = "Profile")
             }
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.TwoTone.Settings, contentDescription = "Settings")

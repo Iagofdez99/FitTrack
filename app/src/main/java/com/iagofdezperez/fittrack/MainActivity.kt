@@ -13,6 +13,7 @@ import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
 import com.iagofdezperez.fittrack.ui.data.getCategorias
 import com.iagofdezperez.fittrack.ui.screens.details.DetailScreen
+import com.iagofdezperez.fittrack.ui.screens.login.LoginScreen
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainScreen
 import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,9 @@ class MainActivity : ComponentActivity() {
                     composable(route = Routes.DetailScreen.route) { backStackEntry ->
                         val workoutId = backStackEntry.arguments?.getString("workoutId")
                         DetailScreen(navController,exercisesWorkout, workoutId.orEmpty())
+                    }
+                    composable(route = Routes.LoginScreen.route){
+                        LoginScreen(navController)
                     }
                 }
             }

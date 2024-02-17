@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.WorkoutCategoriesData
 import com.iagofdezperez.fittrack.ui.elements.WorkoutScreen
 import com.iagofdezperez.fittrack.ui.elements.WorkoutsBottomAppBar
@@ -17,8 +18,8 @@ public fun MainScreen(
     navController: NavHostController
 ) {
     Scaffold(
-        topBar = { WorkoutsTopAppBar() },
-        bottomBar = { WorkoutsBottomAppBar() },
+        topBar = { WorkoutsTopAppBar (navHost = { navController.navigate(Routes.LoginScreen.route) })},
+        bottomBar = { WorkoutsBottomAppBar (navHost = { navController.navigate(Routes.LoginScreen.route) })},
         containerColor = Color.Gray
     ) {
         WorkoutScreen(workoutCategories, navController, modifier = Modifier.padding(it))

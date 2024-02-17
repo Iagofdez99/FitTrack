@@ -21,11 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.data.Routes
 
 @Composable
-fun WorkoutCard(workoutId: String, @DrawableRes image: Int, navController: NavHostController) {
+fun WorkoutCard(workoutId: String, @DrawableRes image: Int, onNavigationCard:(String) ->  Unit) {
     Card(
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
         shape = RoundedCornerShape(16.dp),
@@ -35,7 +33,7 @@ fun WorkoutCard(workoutId: String, @DrawableRes image: Int, navController: NavHo
         Column {
             Box(
                 modifier = Modifier
-                    .clickable { navController.navigate(Routes.DetailScreen.createRoute(workoutId)) }
+                    .clickable { onNavigationCard(workoutId) }
             ) {
                 Image(
                     painter = painterResource(id = image),

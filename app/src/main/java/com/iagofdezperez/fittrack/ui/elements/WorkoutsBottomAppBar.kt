@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WorkoutsBottomAppBar(modifier: Modifier = Modifier) {
+fun WorkoutsBottomAppBar(modifier: Modifier = Modifier, navHost: () -> Unit) {
     var index by rememberSaveable { mutableStateOf(0) }
     NavigationBar(containerColor = Color.Black) {
 
