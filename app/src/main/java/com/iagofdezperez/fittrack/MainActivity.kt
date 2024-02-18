@@ -19,20 +19,23 @@ import com.iagofdezperez.fittrack.ui.screens.login.LoginScreen
 import com.iagofdezperez.fittrack.ui.screens.login.LoginViewModel
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainScreen
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
+import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.WorkoutCalendarScreen
+import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.WorkoutCalendarViewModel
 import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
-    private val mainViewModel:MainViewModel by viewModels()
-    private val detailViewModel:DetailViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+    private val detailViewModel: DetailViewModel by viewModels()
+    private val workoutCalendarViewModel: WorkoutCalendarViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FitTrackTheme {
                 val workoutCategories by rememberSaveable { mutableStateOf(getCategorias()) }
-                val exercisesWorkout by rememberSaveable { mutableStateOf(exercisesWorkoutList())}
+                val exercisesWorkout by rememberSaveable { mutableStateOf(exercisesWorkoutList()) }
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = Routes.MainScreen.route) {
@@ -52,8 +55,15 @@ class MainActivity : ComponentActivity() {
                             mainViewModel = mainViewModel
                         )
                     }
-                    composable(route = Routes.LoginScreen.route){
+                    composable(route = Routes.LoginScreen.route) {
                         LoginScreen(navController = navController, loginViewModel = loginViewModel)
+                    }
+                    composable(route = Routes.WorkoutCalendar.route) {
+                        WorkoutCalendarScreen(
+                            navController = navController,
+                            mainViewModel = mainViewModel,
+                            calendarViewModel = workoutCalendarViewModel
+                        )
                     }
                 }
             }

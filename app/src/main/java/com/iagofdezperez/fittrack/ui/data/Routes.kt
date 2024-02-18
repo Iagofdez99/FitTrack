@@ -6,5 +6,6 @@ sealed class Routes(val route: String) {
         fun createRoute(workoutId:String) = "DetailScreen/$workoutId"
     }
     object LoginScreen : Routes("LoginScreen")
+    object WorkoutCalendar:Routes("WorkoutCalendar")
 
 }

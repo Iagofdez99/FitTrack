@@ -11,7 +11,7 @@ class MainViewModel @Inject constructor(): ViewModel() {
     private val _index = MutableLiveData<Int>()
     val index : LiveData<Int> = _index
 
-    fun onIndexrChanged(index:Int){
+    fun onIndexChanged(index:Int){
         _index.value = index
     }
 }

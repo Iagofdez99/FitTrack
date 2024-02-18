@@ -15,19 +15,25 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 
 @Composable
 fun WorkoutsBottomAppBar(
     modifier: Modifier = Modifier,
-    navHost: () -> Unit,
+    onNavigate: (String) -> Unit,
     mainViewModel: MainViewModel
 ) {
     val index: Int by mainViewModel.index.observeAsState(initial = 0)
+
     NavigationBar(containerColor = Color.Black) {
         NavigationBarItem(
-            selected = index == 0,
-            onClick = { mainViewModel.onIndexrChanged(0) },
+            //selected = index == 0
+            selected = false,
+            onClick = {
+                mainViewModel.onIndexChanged(0)
+                onNavigate(Routes.MainScreen.route)
+            },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),
                 selectedTextColor = Color.White,
@@ -48,8 +54,12 @@ fun WorkoutsBottomAppBar(
         )
 
         NavigationBarItem(
-            selected = index == 1,
-            onClick = { mainViewModel.onIndexrChanged(1) },
+            //selected = index == 1
+            selected = false,
+            onClick = {
+                mainViewModel.onIndexChanged(1)
+                onNavigate(Routes.WorkoutCalendar.route)
+                      },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),
                 selectedTextColor = Color.White,

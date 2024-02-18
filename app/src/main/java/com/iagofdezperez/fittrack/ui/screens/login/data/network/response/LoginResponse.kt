@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.screens.mainScreen.data.network.response
+package com.iagofdezperez.fittrack.ui.screens.login.data.network.response
 
 import com.google.gson.annotations.SerializedName
 

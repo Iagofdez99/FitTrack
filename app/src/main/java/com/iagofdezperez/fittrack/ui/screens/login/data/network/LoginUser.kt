@@ -1,6 +1,6 @@
-package com.iagofdezperez.fittrack.ui.screens.mainScreen.data.network
+package com.iagofdezperez.fittrack.ui.screens.login.data.network
 
-import com.iagofdezperez.fittrack.ui.screens.mainScreen.data.network.response.LoginResponse
+import com.iagofdezperez.fittrack.ui.screens.login.data.network.response.LoginResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

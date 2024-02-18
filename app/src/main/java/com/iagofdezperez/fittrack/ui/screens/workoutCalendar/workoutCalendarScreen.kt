@@ -1,29 +1,30 @@
-package com.iagofdezperez.fittrack.ui.screens.mainScreen
+package com.iagofdezperez.fittrack.ui.screens.workoutCalendar
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.twotone.Menu
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.data.WorkoutCategoriesData
-import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutScreen
+import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsTopAppBar
+import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.components.MyCalendarScreen
 
 @Composable
-public fun MainScreen(
-    workoutCategories: List<WorkoutCategoriesData>,
+fun WorkoutCalendarScreen(
     navController: NavHostController,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    calendarViewModel: WorkoutCalendarViewModel
 ) {
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(
-                onNavigate = { navController.navigate(it) },
-                imageVector = Icons.TwoTone.Menu
+                onNavigate = { navController.popBackStack() },
+                imageVector = Icons.Default.ArrowBack,
+                title = "Calendar"
             )
         },
         bottomBar = {
@@ -32,12 +33,7 @@ public fun MainScreen(
                 mainViewModel = mainViewModel
             )
         },
-        containerColor = Color.Gray
+        containerColor = Color.White
     ) {
-        WorkoutScreen(
-            workoutCategories = workoutCategories,
-            navController = navController,
-            modifier = Modifier.padding(it)
-        )
-    }
-}
+        MyCalendarScreen(modifier = Modifier.padding(it),calendarViewModel)
+    }}

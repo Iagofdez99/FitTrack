@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.screens.mainScreen.data.network
+package com.iagofdezperez.fittrack.ui.screens.login.data.network
 
 import com.iagofdezperez.fittrack.ui.core.network.RetrofitHelper
 import kotlinx.coroutines.Dispatchers

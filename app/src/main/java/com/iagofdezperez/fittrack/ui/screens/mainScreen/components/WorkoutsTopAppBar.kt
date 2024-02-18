@@ -25,7 +25,7 @@ import com.iagofdezperez.fittrack.ui.data.Routes
 fun WorkoutsTopAppBar(
     modifier: Modifier = Modifier,
     title: String = "FitTrack App",
-    navHost: (String) -> Unit,
+    onNavigate: (String) -> Unit,
     imageVector: ImageVector
 ) {
     MediumTopAppBar(
@@ -34,7 +34,7 @@ fun WorkoutsTopAppBar(
                 letterSpacing = 2.sp,
                 text = title,
                 fontWeight = FontWeight.Bold,
-                fontSize = 26.sp
+                fontSize = 26.sp,
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -46,7 +46,7 @@ fun WorkoutsTopAppBar(
         navigationIcon = {
             IconButton(onClick = {
                 if (imageVector == Icons.Default.ArrowBack) {
-                    navHost(Routes.MainScreen.route)
+                    onNavigate(Routes.MainScreen.route)
                 }
             }) {
                 Icon(imageVector = imageVector, contentDescription = "Menu")
@@ -59,7 +59,7 @@ fun WorkoutsTopAppBar(
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.TwoTone.Search, contentDescription = "Date")
             }
-            IconButton(onClick = { navHost(Routes.LoginScreen.route) }) {
+            IconButton(onClick = { onNavigate(Routes.LoginScreen.route) }) {
                 Icon(imageVector = Icons.TwoTone.Person, contentDescription = "Profile")
             }
             IconButton(onClick = {}) {

@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsBottomAppBar
@@ -33,13 +32,13 @@ fun DetailScreen(
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(title = "$workoutId workout",
-                navHost = { navController.navigate(it) },
+                onNavigate = { navController.popBackStack() },
                 imageVector = Icons.Default.ArrowBack
             )
         },
         bottomBar = {
             WorkoutsBottomAppBar(
-                navHost = { navController.navigate(Routes.LoginScreen.route) },
+                onNavigate = { navController.navigate(it) },
                 mainViewModel = mainViewModel
             )
         },
