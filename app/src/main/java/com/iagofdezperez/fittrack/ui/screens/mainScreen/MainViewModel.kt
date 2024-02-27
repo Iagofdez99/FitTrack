@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(): ViewModel() {
+
     private val _index = MutableLiveData<Int>()
     val index : LiveData<Int> = _index
 

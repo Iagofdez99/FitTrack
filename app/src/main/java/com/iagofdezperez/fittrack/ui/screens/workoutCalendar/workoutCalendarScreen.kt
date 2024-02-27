@@ -7,8 +7,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsTopAppBar
 import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.components.MyCalendarScreen
@@ -16,8 +16,7 @@ import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.components.MyCalend
 @Composable
 fun WorkoutCalendarScreen(
     navController: NavHostController,
-    mainViewModel: MainViewModel,
-    calendarViewModel: WorkoutCalendarViewModel
+    viewModel: WorkoutCalendarViewModel = hiltViewModel(),
 ) {
     Scaffold(
         topBar = {
@@ -30,10 +29,9 @@ fun WorkoutCalendarScreen(
         bottomBar = {
             WorkoutsBottomAppBar(
                 onNavigate = { navController.navigate(it) },
-                mainViewModel = mainViewModel
             )
         },
         containerColor = Color.White
     ) {
-        MyCalendarScreen(modifier = Modifier.padding(it),calendarViewModel)
+        MyCalendarScreen(modifier = Modifier.padding(it),viewModel)
     }}

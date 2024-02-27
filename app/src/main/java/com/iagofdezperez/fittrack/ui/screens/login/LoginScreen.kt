@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.screens.login.components.LoginBody
@@ -18,7 +19,7 @@ import com.iagofdezperez.fittrack.ui.screens.login.components.LoginHeader
 
 
 @Composable
-fun LoginScreen(navController: NavHostController, loginViewModel: LoginViewModel) {
+fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -30,7 +31,7 @@ fun LoginScreen(navController: NavHostController, loginViewModel: LoginViewModel
                 .align(Alignment.TopEnd)
                 .size(32.dp)
         ) { navController.navigate(Routes.MainScreen.route) }
-        LoginBody(modifier = Modifier.align(Alignment.Center), loginViewModel = loginViewModel)
+        LoginBody(modifier = Modifier.align(Alignment.Center), loginViewModel = viewModel)
         LoginBottom(modifier = Modifier.align(Alignment.BottomCenter))
     }
 }

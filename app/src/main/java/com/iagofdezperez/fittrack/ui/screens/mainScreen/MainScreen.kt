@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.ui.data.WorkoutCategoriesData
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutScreen
@@ -17,7 +18,7 @@ import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsTopAp
 public fun MainScreen(
     workoutCategories: List<WorkoutCategoriesData>,
     navController: NavHostController,
-    mainViewModel: MainViewModel
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     Scaffold(
         topBar = {
@@ -29,7 +30,6 @@ public fun MainScreen(
         bottomBar = {
             WorkoutsBottomAppBar(
                 onNavigate = { navController.navigate(it) },
-                mainViewModel = mainViewModel
             )
         },
         containerColor = Color.Gray

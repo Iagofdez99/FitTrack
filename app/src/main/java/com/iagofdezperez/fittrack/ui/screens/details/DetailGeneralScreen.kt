@@ -15,9 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.ui.data.exercisesWorkout
-import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.components.WorkoutsTopAppBar
 
@@ -26,7 +26,7 @@ fun DetailScreen(
     navController: NavHostController,
     exercisesWorkout: List<exercisesWorkout>,
     workoutId: String,
-    mainViewModel: MainViewModel
+    viewModel : DetailViewModel = hiltViewModel()
 ) {
     val exercises = exercisesWorkout.groupBy { it.muscleGroup }
     Scaffold(
@@ -39,7 +39,6 @@ fun DetailScreen(
         bottomBar = {
             WorkoutsBottomAppBar(
                 onNavigate = { navController.navigate(it) },
-                mainViewModel = mainViewModel
             )
         },
     ) { paddingValues ->

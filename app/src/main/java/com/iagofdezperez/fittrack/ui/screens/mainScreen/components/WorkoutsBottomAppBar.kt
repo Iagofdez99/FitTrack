@@ -15,6 +15,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.iagofdezperez.fittrack.ui.data.Routes
 import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 
@@ -22,16 +23,16 @@ import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainViewModel
 fun WorkoutsBottomAppBar(
     modifier: Modifier = Modifier,
     onNavigate: (String) -> Unit,
-    mainViewModel: MainViewModel
+    viewModel: MainViewModel = hiltViewModel()
 ) {
-    val index: Int by mainViewModel.index.observeAsState(initial = 0)
+    val index: Int by viewModel.index.observeAsState(initial = 0)
 
     NavigationBar(containerColor = Color.Black) {
         NavigationBarItem(
             //selected = index == 0
             selected = false,
             onClick = {
-                mainViewModel.onIndexChanged(0)
+                viewModel.onIndexChanged(0)
                 onNavigate(Routes.MainScreen.route)
             },
             colors = NavigationBarItemDefaults.colors(
@@ -57,7 +58,7 @@ fun WorkoutsBottomAppBar(
             //selected = index == 1
             selected = false,
             onClick = {
-                mainViewModel.onIndexChanged(1)
+                viewModel.onIndexChanged(1)
                 onNavigate(Routes.WorkoutCalendar.route)
                       },
             colors = NavigationBarItemDefaults.colors(
