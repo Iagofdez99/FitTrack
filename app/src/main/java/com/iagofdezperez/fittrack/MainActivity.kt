@@ -9,13 +9,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.iagofdezperez.fittrack.ui.data.Routes
-import com.iagofdezperez.fittrack.ui.data.exercisesWorkoutList
-import com.iagofdezperez.fittrack.ui.data.getCategorias
-import com.iagofdezperez.fittrack.ui.screens.details.DetailScreen
-import com.iagofdezperez.fittrack.ui.screens.login.LoginScreen
-import com.iagofdezperez.fittrack.ui.screens.mainScreen.MainScreen
-import com.iagofdezperez.fittrack.ui.screens.workoutCalendar.WorkoutCalendarScreen
+import com.iagofdezperez.fittrack.bbdd.CategoriesDDBBHelper
+import com.iagofdezperez.fittrack.bbdd.WorkoutsDDBBHelper
+import com.iagofdezperez.fittrack.data.Routes
+import com.iagofdezperez.fittrack.features.addCategory.getCategorias
+import com.iagofdezperez.fittrack.features.addWorkout.exercisesWorkoutList
+import com.iagofdezperez.fittrack.screens.details.DetailScreen
+import com.iagofdezperez.fittrack.screens.login.LoginScreen
+import com.iagofdezperez.fittrack.screens.mainScreen.MainScreen
+import com.iagofdezperez.fittrack.screens.workoutCalendar.WorkoutCalendarScreen
 import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val workoutHelper = WorkoutsDDBBHelper(this)
+        val writableWorkoutDB = workoutHelper.readableDatabase
+
+        val categoriesHelper = CategoriesDDBBHelper(this)
+        val writableCategoriesDB = categoriesHelper.readableDatabase
+
         setContent {
             FitTrackTheme {
                 val workoutCategories by rememberSaveable { mutableStateOf(getCategorias()) }
