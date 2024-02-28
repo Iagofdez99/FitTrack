@@ -17,18 +17,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.domain.exercisesWorkout
+import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsTopAppBar
 
 @Composable
 fun DetailScreen(
     navController: NavHostController,
-    exercisesWorkout: List<exercisesWorkout>,
+    workoutCategories: List<WorkoutExercises>,
     workoutId: String,
     viewModel : DetailViewModel = hiltViewModel()
 ) {
-    val exercises = exercisesWorkout.groupBy { it.muscleGroup }
+    val exercises = workoutCategories.groupBy { it.muscleGroup }
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(title = "$workoutId workout",

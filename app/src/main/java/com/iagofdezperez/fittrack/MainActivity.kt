@@ -9,8 +9,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.iagofdezperez.fittrack.bbdd.CategoriesDDBBHelper
-import com.iagofdezperez.fittrack.bbdd.WorkoutsDDBBHelper
 import com.iagofdezperez.fittrack.data.Routes
 import com.iagofdezperez.fittrack.features.addCategory.getCategorias
 import com.iagofdezperez.fittrack.features.addWorkout.exercisesWorkoutList
@@ -18,7 +16,7 @@ import com.iagofdezperez.fittrack.screens.details.DetailScreen
 import com.iagofdezperez.fittrack.screens.login.LoginScreen
 import com.iagofdezperez.fittrack.screens.mainScreen.MainScreen
 import com.iagofdezperez.fittrack.screens.workoutCalendar.WorkoutCalendarScreen
-import com.iagofdezperez.fittrack.ui.theme.FitTrackTheme
+import com.iagofdezperez.fittrack.theme.FitTrackTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,11 +24,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val workoutHelper = WorkoutsDDBBHelper(this)
-        val writableWorkoutDB = workoutHelper.readableDatabase
+        //val workoutHelper = WorkoutsDDBBHelper(this)
+        //val writableWorkoutDB = workoutHelper.readableDatabase
 
-        val categoriesHelper = CategoriesDDBBHelper(this)
-        val writableCategoriesDB = categoriesHelper.readableDatabase
+        //val categoriesHelper = CategoriesDDBBHelper(this)
+        //val writableCategoriesDB = categoriesHelper.readableDatabase
+
 
         setContent {
             FitTrackTheme {
@@ -49,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         val workoutId = backStackEntry.arguments?.getString("workoutId")
                         DetailScreen(
                             navController = navController,
-                            exercisesWorkout = exercisesWorkout,
+                            workoutCategories = exercisesWorkout,
                             workoutId = workoutId.orEmpty(),
                         )
                     }

@@ -1,49 +1,59 @@
 package com.iagofdezperez.fittrack.features.addWorkout
 
-import com.iagofdezperez.fittrack.domain.exercisesWorkout
+import android.content.ContentValues
+import android.database.sqlite.SQLiteDatabase
+import com.iagofdezperez.fittrack.bbdd.WorkoutDBScheme
+import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import javax.inject.Inject
 
-class WorkoutsRepository @Inject constructor(){
-
+class WorkoutsRepository @Inject constructor(private val db: SQLiteDatabase){
+    fun guardarWorkout(exercise:WorkoutExercises){
+        val values = ContentValues().apply {
+            put(WorkoutDBScheme.COLUMN_NAME,exercise.name)
+            put(WorkoutDBScheme.COLUMN_GROUP,exercise.muscleGroup)
+        }
+        db.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS,null,values)
+    }
 }
-fun exercisesWorkoutList(): List<exercisesWorkout> = listOf(
-    exercisesWorkout("Absss","Abs"),
-    exercisesWorkout("Absss","Abs"),
-    exercisesWorkout("Absss","Abs"),
 
-    exercisesWorkout("Chesst","Chest"),
-    exercisesWorkout("Chesst","Chest"),
-    exercisesWorkout("Chesst","Chest"),
+fun exercisesWorkoutList(): List<WorkoutExercises> = listOf(
+    WorkoutExercises("Absss","Abs"),
+    WorkoutExercises("Absss","Abs"),
+    WorkoutExercises("Absss","Abs"),
 
-    exercisesWorkout("BAckkk","Back"),
-    exercisesWorkout("BAckkk","Back"),
-    exercisesWorkout("BAckkk","Back"),
+    WorkoutExercises("Chesst","Chest"),
+    WorkoutExercises("Chesst","Chest"),
+    WorkoutExercises("Chesst","Chest"),
 
-    exercisesWorkout("Legssss","Front legs"),
-    exercisesWorkout("Legssss","Front legs"),
-    exercisesWorkout("Legssss","Front legs"),
+    WorkoutExercises("BAckkk","Back"),
+    WorkoutExercises("BAckkk","Back"),
+    WorkoutExercises("BAckkk","Back"),
 
-    exercisesWorkout("Back legss","Back legs"),
-    exercisesWorkout("Back legss","Back legs"),
-    exercisesWorkout("Back legss","Back legs"),
+    WorkoutExercises("Legssss","Front legs"),
+    WorkoutExercises("Legssss","Front legs"),
+    WorkoutExercises("Legssss","Front legs"),
 
-    exercisesWorkout("Shoulderss","Shoulders"),
-    exercisesWorkout("Shoulderss","Shoulders"),
-    exercisesWorkout("Shoulderss","Shoulders"),
+    WorkoutExercises("Back legss","Back legs"),
+    WorkoutExercises("Back legss","Back legs"),
+    WorkoutExercises("Back legss","Back legs"),
 
-    exercisesWorkout("Bicepss","Biceps"),
-    exercisesWorkout("Bicepss","Biceps"),
-    exercisesWorkout("Bicepss","Biceps"),
+    WorkoutExercises("Shoulderss","Shoulders"),
+    WorkoutExercises("Shoulderss","Shoulders"),
+    WorkoutExercises("Shoulderss","Shoulders"),
 
-    exercisesWorkout("TRicepsss","Triceps"),
-    exercisesWorkout("TRicepsss","Triceps"),
-    exercisesWorkout("TRicepsss","Triceps"),
+    WorkoutExercises("Bicepss","Biceps"),
+    WorkoutExercises("Bicepss","Biceps"),
+    WorkoutExercises("Bicepss","Biceps"),
 
-    exercisesWorkout("Front mix","Front mix"),
-    exercisesWorkout("Front mix","Front mix"),
-    exercisesWorkout("Front mix","Front mix"),
+    WorkoutExercises("TRicepsss","Triceps"),
+    WorkoutExercises("TRicepsss","Triceps"),
+    WorkoutExercises("TRicepsss","Triceps"),
 
-    exercisesWorkout("Back mix","Back mix"),
-    exercisesWorkout("Back mix","Back mix"),
-    exercisesWorkout("Back mix","Back mix"),
+    WorkoutExercises("Front mix","Front mix"),
+    WorkoutExercises("Front mix","Front mix"),
+    WorkoutExercises("Front mix","Front mix"),
+
+    WorkoutExercises("Back mix","Back mix"),
+    WorkoutExercises("Back mix","Back mix"),
+    WorkoutExercises("Back mix","Back mix"),
 )

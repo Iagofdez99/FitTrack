@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.ui.theme
+package com.iagofdezperez.fittrack.theme
 
 import androidx.compose.ui.graphics.Color
 

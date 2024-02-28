@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.iagofdezperez.fittrack.data.Routes
-import com.iagofdezperez.fittrack.domain.WorkoutCategoriesData
+import com.iagofdezperez.fittrack.domain.WorkoutCategories
 
 @Composable
 fun WorkoutScreen(
-    workoutCategories: List<WorkoutCategoriesData>,
+    workoutCategories: List<WorkoutCategories>,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
