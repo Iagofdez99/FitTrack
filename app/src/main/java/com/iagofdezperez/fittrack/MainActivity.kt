@@ -33,8 +33,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             FitTrackTheme {
-                val workoutCategories by rememberSaveable { mutableStateOf(getCategorias()) }
-                val exercisesWorkout by rememberSaveable { mutableStateOf(exercisesWorkoutList()) }
+
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = Routes.MainScreen.route) {
@@ -48,7 +47,6 @@ class MainActivity : ComponentActivity() {
                         val workoutId = backStackEntry.arguments?.getString("workoutId")
                         DetailScreen(
                             navController = navController,
-                            workoutCategories = exercisesWorkout,
                             workoutId = workoutId.orEmpty(),
                         )
                     }

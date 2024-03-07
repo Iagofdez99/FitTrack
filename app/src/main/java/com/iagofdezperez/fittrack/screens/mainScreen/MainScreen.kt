@@ -16,10 +16,10 @@ import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsTopAppBa
 
 @Composable
 public fun MainScreen(
-    workoutCategories: List<WorkoutCategories>,
     navController: NavHostController,
     viewModel: MainViewModel = hiltViewModel()
 ) {
+    val workoutCategories= viewModel.state.
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(

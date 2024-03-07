@@ -2,13 +2,17 @@ package com.iagofdezperez.fittrack.features.addWorkout
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.iagofdezperez.fittrack.data.bbdd.WorkoutDBScheme
+import com.iagofdezperez.fittrack.di.WorkoutsDDBB
 import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatabase) {
+class WorkoutsRepository @Inject constructor(
+    @WorkoutsDDBB private val workoutsDb: SQLiteDatabase
+) {
 
     suspend fun setupWorkoutsDB() {
         withContext(IO) {
@@ -90,6 +94,28 @@ class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatab
             put(WorkoutDBScheme.COLUMN_GROUP, exercise.muscleGroup)
         }
         workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
+    }
+
+    fun getWorkouts(workoutId: String): List<WorkoutExercises> {
+        Log.d("WorkoutsRepository", "getWorkouts: $workoutId")
+        val cursor = workoutsDb.query(
+            WorkoutDBScheme.TABLE_NAME_WORKOUTS,
+            null,
+            "${WorkoutDBScheme.COLUMN_GROUP} = ?",
+            arrayOf(workoutId),
+            null,
+            null,
+            null
+        )
+        val exercises = mutableListOf<WorkoutExercises>()
+
+        while (cursor.moveToNext()) {
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_NAME))
+            val group = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_GROUP))
+            exercises.add(WorkoutExercises(name, group))
+        }
+        cursor.close()
+        return exercises
     }
 }
 
