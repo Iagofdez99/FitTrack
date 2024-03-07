@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.bbdd
+package com.iagofdezperez.fittrack.data.bbdd
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -10,8 +10,9 @@ class WorkoutsDDBBHelper(context: Context) :
         db?.execSQL(SQL_CREATE_ENTRIES_WORKOUTS)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL(SQL_CREATE_ENTRIES_WORKOUTS)
+        onCreate(db)
     }
 
     companion object {

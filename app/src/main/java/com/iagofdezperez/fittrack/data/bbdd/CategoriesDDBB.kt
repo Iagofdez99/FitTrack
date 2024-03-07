@@ -1,4 +1,5 @@
-package com.iagofdezperez.fittrack.bbdd
+package com.iagofdezperez.fittrack.data.bbdd
+
 import android.provider.BaseColumns
 object CategoriesDBScheme : BaseColumns{
     const val TABLE_NAME_CATEGORIES = "Workout_Categories"

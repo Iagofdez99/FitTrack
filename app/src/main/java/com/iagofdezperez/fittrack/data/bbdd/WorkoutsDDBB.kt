@@ -1,14 +1,17 @@
-package com.iagofdezperez.fittrack.bbdd
+package com.iagofdezperez.fittrack.data.bbdd
+
 import android.provider.BaseColumns
-object WorkoutDBScheme:BaseColumns{
+
+object WorkoutDBScheme : BaseColumns {
     const val TABLE_NAME_WORKOUTS = "Workout_Exercises"
     const val COLUMN_NAME = "Name"
     const val COLUMN_GROUP = "Muscle_group"
 }
 
-const val SQL_CREATE_ENTRIES_WORKOUTS =  """
+const val SQL_CREATE_ENTRIES_WORKOUTS = """
     CREATE TABLE ${WorkoutDBScheme.TABLE_NAME_WORKOUTS}(
-        ${WorkoutDBScheme.COLUMN_NAME} TEXT PRIMARY KEY,
+        ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${WorkoutDBScheme.COLUMN_NAME} TEXT,
         ${WorkoutDBScheme.COLUMN_GROUP} TEXT)
 """
 

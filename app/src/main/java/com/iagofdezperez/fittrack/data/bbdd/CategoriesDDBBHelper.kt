@@ -1,4 +1,4 @@
-package com.iagofdezperez.fittrack.bbdd
+package com.iagofdezperez.fittrack.data.bbdd
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -12,8 +12,9 @@ class CategoriesDDBBHelper(context: Context) : SQLiteOpenHelper(
         db?.execSQL(SQL_CREATE_ENTRIES_CATEGORIES)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL(SQL_CREATE_ENTRIES_CATEGORIES)
+        onCreate(db)
     }
 
     companion object {
