@@ -2,13 +2,17 @@ package com.iagofdezperez.fittrack.features.addWorkout
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.iagofdezperez.fittrack.data.bbdd.WorkoutDBScheme
+import com.iagofdezperez.fittrack.di.WorkoutsDDBB
 import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatabase) {
+class WorkoutsRepository @Inject constructor(
+    @WorkoutsDDBB private val workoutsDb: SQLiteDatabase
+) {
 
     suspend fun setupWorkoutsDB() {
         withContext(IO) {

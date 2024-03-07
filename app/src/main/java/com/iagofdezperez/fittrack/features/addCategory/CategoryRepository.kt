@@ -4,12 +4,15 @@ import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.iagofdezperez.fittrack.R
 import com.iagofdezperez.fittrack.data.bbdd.CategoriesDBScheme
+import com.iagofdezperez.fittrack.di.CategoriesDDBB
 import com.iagofdezperez.fittrack.domain.WorkoutCategories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CategoryRepository @Inject constructor(private val categoriesDb: SQLiteDatabase) {
+class CategoryRepository @Inject constructor(
+    @CategoriesDDBB private val categoriesDb: SQLiteDatabase
+) {
 
     suspend fun setupWorkoutsDB() {
         withContext(Dispatchers.IO) {
