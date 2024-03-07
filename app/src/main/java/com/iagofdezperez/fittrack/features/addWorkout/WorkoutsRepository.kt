@@ -95,6 +95,28 @@ class WorkoutsRepository @Inject constructor(
         }
         workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
     }
+
+    fun getWorkouts(workoutId: String): List<WorkoutExercises> {
+        Log.d("WorkoutsRepository", "getWorkouts: $workoutId")
+        val cursor = workoutsDb.query(
+            WorkoutDBScheme.TABLE_NAME_WORKOUTS,
+            null,
+            "${WorkoutDBScheme.COLUMN_GROUP} = ?",
+            arrayOf(workoutId),
+            null,
+            null,
+            null
+        )
+        val exercises = mutableListOf<WorkoutExercises>()
+
+        while (cursor.moveToNext()) {
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_NAME))
+            val group = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_GROUP))
+            exercises.add(WorkoutExercises(name, group))
+        }
+        cursor.close()
+        return exercises
+    }
 }
 
 fun exercisesWorkoutList(): List<WorkoutExercises> = listOf(
