@@ -12,23 +12,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsTopAppBar
 
 @Composable
 fun DetailScreen(
     navController: NavHostController,
-    workoutCategories: List<WorkoutExercises>,
     workoutId: String,
-    viewModel : DetailViewModel = hiltViewModel()
+    viewModel: DetailViewModel = hiltViewModel()
 ) {
-    val exercises = workoutCategories.groupBy { it.muscleGroup }
+    val exercises by viewModel.state.collectAsState()
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(title = "$workoutId workout",
@@ -57,12 +57,8 @@ fun DetailScreen(
                     .padding(0.dp),
                 columns = GridCells.Fixed(1),
             ) {
-                exercises.forEach { (muscleGroup, exercises) ->
-                    if (workoutId == muscleGroup) {
-                        items(exercises) { exercises ->
-                            workoutList(ejercicio = exercises.name)
-                        }
-                    }
+                items(exercises) { exercises ->
+                    workoutList(ejercicio = exercises.name)
                 }
             }
         }

@@ -4,13 +4,15 @@ import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.iagofdezperez.fittrack.R
 import com.iagofdezperez.fittrack.data.bbdd.CategoriesDBScheme
+import com.iagofdezperez.fittrack.di.CategoriesDDBB
 import com.iagofdezperez.fittrack.domain.WorkoutCategories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CategoryRepository @Inject constructor(private val categoriesDb: SQLiteDatabase) {
-
+class CategoryRepository @Inject constructor(
+    @CategoriesDDBB private val categoriesDb: SQLiteDatabase
+) {
     suspend fun setupWorkoutsDB() {
         withContext(Dispatchers.IO) {
             val cursor = categoriesDb.rawQuery(
@@ -91,31 +93,7 @@ class CategoryRepository @Inject constructor(private val categoriesDb: SQLiteDat
             categoriesDb.insert(CategoriesDBScheme.TABLE_NAME_CATEGORIES, null, values)
         }
     }
-
-//    suspend fun getCategories(): List<WorkoutCategories> {
-//        return withContext(IO) {
-//
-//            val cursor = categoriesDb.query(
-//                CategoriesDBScheme.TABLE_NAME_CATEGORIES,
-//                null,
-//                null,
-//                null,
-//                null,
-//                null,
-//                null
-//            )
-//            val categories = mutableListOf<WorkoutCategories>()
-//            while (cursor.moveToNext()) {
-//                val name = cursor.getString(cursor.getColumnIndex(CategoriesDBScheme.COLUMN_CATEGORY))
-//                val image = cursor.getString(cursor.getColumnIndex(CategoriesDBScheme.COLUMN_IMAGE))
-//                categories.add((WorkoutCategories(name, R.drawable.back )))
-//            }
-//            categories
-//        }
-//    }
-
 }
-
 
 
 fun getCategorias(): List<WorkoutCategories> = listOf(

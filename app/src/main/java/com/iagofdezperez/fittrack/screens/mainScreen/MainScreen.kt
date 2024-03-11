@@ -9,18 +9,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.domain.WorkoutCategories
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutScreen
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsTopAppBar
 
 @Composable
 public fun MainScreen(
-    workoutCategories: List<WorkoutCategories>,
     navController: NavHostController,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    Scaffold(
+    var workoutCategories = viewModel.state
+        Scaffold(
         topBar = {
             WorkoutsTopAppBar(
                 onNavigate = { navController.navigate(it) },

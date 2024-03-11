@@ -2,14 +2,17 @@ package com.iagofdezperez.fittrack.features.addWorkout
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.iagofdezperez.fittrack.data.bbdd.WorkoutDBScheme
+import com.iagofdezperez.fittrack.di.WorkoutsDDBB
 import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatabase) {
-
+class WorkoutsRepository @Inject constructor(
+    @WorkoutsDDBB private val workoutsDb: SQLiteDatabase
+) {
     suspend fun setupWorkoutsDB() {
         withContext(IO) {
             val cursor = workoutsDb.rawQuery(
@@ -40,13 +43,13 @@ class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatab
 
                 values = ContentValues().apply {
                     put(WorkoutDBScheme.COLUMN_NAME, "Ejercicio 1")
-                    put(WorkoutDBScheme.COLUMN_GROUP, "Front Legs")
+                    put(WorkoutDBScheme.COLUMN_GROUP, "Front legs")
                 }
                 workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
 
                 values = ContentValues().apply {
                     put(WorkoutDBScheme.COLUMN_NAME, "Ejercicio 1")
-                    put(WorkoutDBScheme.COLUMN_GROUP, "Back Legs")
+                    put(WorkoutDBScheme.COLUMN_GROUP, "Back legs")
                 }
                 workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
 
@@ -70,13 +73,13 @@ class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatab
 
                 values = ContentValues().apply {
                     put(WorkoutDBScheme.COLUMN_NAME, "Ejercicio 1")
-                    put(WorkoutDBScheme.COLUMN_GROUP, "Front Mix")
+                    put(WorkoutDBScheme.COLUMN_GROUP, "Front mix")
                 }
                 workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
 
                 values = ContentValues().apply {
                     put(WorkoutDBScheme.COLUMN_NAME, "Ejercicio 1")
-                    put(WorkoutDBScheme.COLUMN_GROUP, "Back Mix")
+                    put(WorkoutDBScheme.COLUMN_GROUP, "Back mix")
                 }
                 workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
 
@@ -91,7 +94,30 @@ class WorkoutsRepository @Inject constructor(private val workoutsDb: SQLiteDatab
         }
         workoutsDb.insert(WorkoutDBScheme.TABLE_NAME_WORKOUTS, null, values)
     }
+
+    fun getWorkouts(workoutId: String): List<WorkoutExercises> {
+        Log.d("WorkoutsRepository", "getWorkouts: $workoutId")
+        val cursor = workoutsDb.query(
+            WorkoutDBScheme.TABLE_NAME_WORKOUTS,
+            null,
+            "${WorkoutDBScheme.COLUMN_GROUP} = ?",
+            arrayOf(workoutId),
+            null,
+            null,
+            null
+        )
+        val exercises = mutableListOf<WorkoutExercises>()
+
+        while (cursor.moveToNext()) {
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_NAME))
+            val group = cursor.getString(cursor.getColumnIndexOrThrow(WorkoutDBScheme.COLUMN_GROUP))
+            exercises.add(WorkoutExercises(name, group))
+        }
+        cursor.close()
+        return exercises
+    }
 }
+
 
 fun exercisesWorkoutList(): List<WorkoutExercises> = listOf(
     WorkoutExercises("Absss", "Abs"),
