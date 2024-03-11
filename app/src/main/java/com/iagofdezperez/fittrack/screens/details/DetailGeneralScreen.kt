@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.iagofdezperez.fittrack.domain.WorkoutExercises
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsBottomAppBar
 import com.iagofdezperez.fittrack.screens.mainScreen.components.WorkoutsTopAppBar
 
@@ -29,16 +30,31 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel()
 ) {
     val exercises by viewModel.state.collectAsState()
+    DetailScreenContent(
+        exerciseList = exercises,
+        workoutId = workoutId,
+        onNavigate = { navController.navigate("WorkoutCalendar") },
+        onBackArrow = { navController.popBackStack() })
+}
+
+@Composable
+fun DetailScreenContent(
+    exerciseList: List<WorkoutExercises>,
+    workoutId: String,
+    onNavigate: () -> Unit,
+    onBackArrow: () -> Unit
+) {
     Scaffold(
         topBar = {
-            WorkoutsTopAppBar(title = "$workoutId workout",
-                onNavigate = { navController.popBackStack() },
+            WorkoutsTopAppBar(
+                title = "$workoutId workout",
+                onNavigate = { onBackArrow() },
                 imageVector = Icons.Default.ArrowBack
             )
         },
         bottomBar = {
             WorkoutsBottomAppBar(
-                onNavigate = { navController.navigate(it) },
+                onNavigate = { onNavigate() },
             )
         },
     ) { paddingValues ->
@@ -57,7 +73,7 @@ fun DetailScreen(
                     .padding(0.dp),
                 columns = GridCells.Fixed(1),
             ) {
-                items(exercises) { exercises ->
+                items(exerciseList) { exercises ->
                     workoutList(ejercicio = exercises.name)
                 }
             }
