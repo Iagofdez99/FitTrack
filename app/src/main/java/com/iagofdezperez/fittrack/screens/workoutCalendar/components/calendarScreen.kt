@@ -23,13 +23,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.iagofdezperez.fittrack.screens.workoutCalendar.WorkoutCalendarViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
 @Composable
-fun MyCalendarScreen(modifier: Modifier = Modifier, calendarViewModel: WorkoutCalendarViewModel) {
+fun MyCalendarScreen(
+    modifier: Modifier = Modifier,
+    calendarViewModel: WorkoutCalendarViewModel = hiltViewModel()
+) {
     DateRow(modifier, calendarViewModel)
 }
 

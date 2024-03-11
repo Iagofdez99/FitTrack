@@ -18,10 +18,17 @@ fun WorkoutCalendarScreen(
     navController: NavHostController,
     viewModel: WorkoutCalendarViewModel = hiltViewModel(),
 ) {
+    WorkoutcalendarContent(
+        navController = navController,
+        onBackArrow = { navController.popBackStack() })
+}
+
+@Composable
+fun WorkoutcalendarContent(navController: NavHostController, onBackArrow: () -> Unit) {
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(
-                onNavigate = { navController.popBackStack() },
+                onNavigate = { onBackArrow() },
                 imageVector = Icons.Default.ArrowBack,
                 title = "Calendar"
             )
@@ -33,5 +40,6 @@ fun WorkoutCalendarScreen(
         },
         containerColor = Color.White
     ) {
-        MyCalendarScreen(modifier = Modifier.padding(it),viewModel)
-    }}
+        MyCalendarScreen(modifier = Modifier.padding(it))
+    }
+}
