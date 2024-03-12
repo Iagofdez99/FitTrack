@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.data.Routes
 import com.iagofdezperez.fittrack.screens.login.components.LoginBody
 import com.iagofdezperez.fittrack.screens.login.components.LoginBottom
 import com.iagofdezperez.fittrack.screens.login.components.LoginHeader
@@ -30,7 +29,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel = hi
         password = password,
         onUserChanged = { viewModel.onUserChanged(it) },
         onPasswordChanged = { viewModel.onPasswordChanged(it) },
-        onLogin = { navController.navigate(Routes.MainScreen.route) })
+        onCrossClick = { navController.popBackStack() })
 }
 
 @Composable
@@ -39,7 +38,7 @@ fun LoginContent(
     password: String,
     onUserChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onLogin: () -> Unit
+    onCrossClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -51,7 +50,7 @@ fun LoginContent(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .size(32.dp)
-        ) { onLogin() }
+        ) { onCrossClick() }
         LoginBody(
             modifier = Modifier.align(Alignment.Center),
             user = user,
@@ -72,7 +71,7 @@ fun LoginScreenPreview() {
         password = "dicit",
         onUserChanged = {},
         onPasswordChanged = {},
-        onLogin = {}
+        onCrossClick = {}
     )
 }
 

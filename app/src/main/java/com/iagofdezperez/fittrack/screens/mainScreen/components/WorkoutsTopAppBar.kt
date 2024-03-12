@@ -18,7 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.iagofdezperez.fittrack.data.Routes
+import com.iagofdezperez.fittrack.screens.login.LOGIN_ROUTE
+import com.iagofdezperez.fittrack.screens.mainScreen.MAINSCREEN_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +47,7 @@ fun WorkoutsTopAppBar(
         navigationIcon = {
             IconButton(onClick = {
                 if (imageVector == Icons.Default.ArrowBack) {
-                    onNavigate(Routes.MainScreen.route)
+                    onNavigate(MAINSCREEN_ROUTE)
                 }
             }) {
                 Icon(imageVector = imageVector, contentDescription = "Menu")
@@ -59,7 +60,7 @@ fun WorkoutsTopAppBar(
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.TwoTone.Search, contentDescription = "Date")
             }
-            IconButton(onClick = { onNavigate(Routes.LoginScreen.route) }) {
+            IconButton(onClick = { onNavigate(LOGIN_ROUTE) }) {
                 Icon(imageVector = Icons.TwoTone.Person, contentDescription = "Profile")
             }
             IconButton(onClick = {}) {

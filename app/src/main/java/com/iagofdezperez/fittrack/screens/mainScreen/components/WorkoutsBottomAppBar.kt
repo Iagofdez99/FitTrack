@@ -10,14 +10,13 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.iagofdezperez.fittrack.data.Routes
+import com.iagofdezperez.fittrack.screens.mainScreen.MAINSCREEN_ROUTE
 import com.iagofdezperez.fittrack.screens.mainScreen.MainViewModel
+import com.iagofdezperez.fittrack.screens.workoutCalendar.CALENDAR_ROUTE
 
 @Composable
 fun WorkoutsBottomAppBar(
@@ -25,7 +24,7 @@ fun WorkoutsBottomAppBar(
     onNavigate: (String) -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    val index: Int by viewModel.index.observeAsState(initial = 0)
+    //val index: Int by viewModel.index.observeAsState(initial = 0)
 
     NavigationBar(containerColor = Color.Black) {
         NavigationBarItem(
@@ -33,7 +32,7 @@ fun WorkoutsBottomAppBar(
             selected = false,
             onClick = {
                 viewModel.onIndexChanged(0)
-                onNavigate(Routes.MainScreen.route)
+                onNavigate(MAINSCREEN_ROUTE)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),
@@ -59,7 +58,7 @@ fun WorkoutsBottomAppBar(
             selected = false,
             onClick = {
                 viewModel.onIndexChanged(1)
-                onNavigate(Routes.WorkoutCalendar.route)
+                onNavigate(CALENDAR_ROUTE)
                       },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFFF96846),

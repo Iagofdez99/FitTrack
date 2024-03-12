@@ -22,11 +22,17 @@ public fun MainScreen(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     var workoutCategories = viewModel.state
-    MainScreenContent(navController, workoutCategories)
+    MainScreenContent(
+        navController,
+        categoriesList = workoutCategories,
+    )
 }
 
 @Composable
-fun MainScreenContent(navController: NavHostController, categoriesList: List<WorkoutCategories>) {
+fun MainScreenContent(
+    navController: NavHostController,
+    categoriesList: List<WorkoutCategories>
+) {
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(

@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.iagofdezperez.fittrack.data.Routes
 import com.iagofdezperez.fittrack.domain.WorkoutCategories
+import com.iagofdezperez.fittrack.screens.details.navigateToDetails
 
 @Composable
 fun WorkoutScreen(
@@ -24,7 +24,8 @@ fun WorkoutScreen(
     ) {
         items(workoutCategories) { workout ->
             WorkoutCard(workoutId = workout.name, image = workout.image) {
-                navController.navigate(Routes.DetailScreen.createRoute(it))
+                //navController.navigate(Routes.DetailScreen.createRoute(it))
+                navController.navigateToDetails(it)
             }
         }
     }

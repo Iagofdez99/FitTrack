@@ -33,28 +33,27 @@ fun DetailScreen(
     DetailScreenContent(
         exerciseList = exercises,
         workoutId = workoutId,
-        onNavigate = { navController.navigate("WorkoutCalendar") },
-        onBackArrow = { navController.popBackStack() })
+        onNavigate = { navController.navigate(it) },
+    )
 }
 
 @Composable
 fun DetailScreenContent(
     exerciseList: List<WorkoutExercises>,
     workoutId: String,
-    onNavigate: () -> Unit,
-    onBackArrow: () -> Unit
+    onNavigate: (String) -> Unit,
 ) {
     Scaffold(
         topBar = {
             WorkoutsTopAppBar(
                 title = "$workoutId workout",
-                onNavigate = { onBackArrow() },
+                onNavigate = { onNavigate(it) },
                 imageVector = Icons.Default.ArrowBack
             )
         },
         bottomBar = {
             WorkoutsBottomAppBar(
-                onNavigate = { onNavigate() },
+                onNavigate = { onNavigate(it) },
             )
         },
     ) { paddingValues ->
